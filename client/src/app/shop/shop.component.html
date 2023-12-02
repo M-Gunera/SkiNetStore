@@ -19,7 +19,6 @@
         >
           {{ brand.name }}
         </li>
-        ss
       </ul>
 
       <h5 class="text-warning ms-1">Types</h5>
@@ -37,11 +36,7 @@
     </section>
     <section class="col-9">
       <div class="d-flex justify-content-between align-items-center pb-2">
-        <app-paging-header
-          [pageNumber]="shopParams.pageNumber"
-          [pageSize]="shopParams.pageSize"
-          [totalCount]="totalCount"
-        ></app-paging-header>
+        <app-paging-header [pageNumber]="shopParams.pageNumber" [pageSize]="shopParams.pageSize" [totalCount]="totalCount"></app-paging-header>
 
         <div class="d-flex mt-2">
           <input
@@ -69,8 +64,7 @@
           [totalCount]="totalCount"
           [pageSize]="shopParams.pageSize"
           (pageChanged)="onPageChanged($event)"
-        >
-        </app-pager>
+        ></app-pager>
       </div>
     </section>
   </div>
