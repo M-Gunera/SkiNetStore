@@ -1,1 +1,10 @@
-/*# sourceMappingURL=home.component.css.map */
+.feature {
+  height: 400px;
+}
+
+img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 600px;
+  width: 100%;
+}/*# sourceMappingURL=home.component.css.map */
