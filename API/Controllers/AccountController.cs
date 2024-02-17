@@ -53,7 +53,7 @@ namespace API.Controllers
         [HttpGet("address")]
         public async Task<ActionResult<AddressDto>> GetUserAddress()
         {
-            var user = await _userManager.FindUserByClaimsPrincipleWithAddressAsync(User);
+            var user = await _userManager.FindUserByClaimsPrincipleWithAddressAsync(HttpContext.User);
 
             return _mapper.Map<Address, AddressDto>(user.Address);
         }
@@ -64,7 +64,15 @@ namespace API.Controllers
         {
             var user = await _userManager.FindUserByClaimsPrincipleWithAddressAsync(HttpContext.User);
 
-            user.Address = _mapper.Map<AddressDto, Address>(address);
+            if (user == null)
+                return BadRequest("User doesn't exist");
+
+            //user.Address = _mapper.Map<AddressDto, Address>(address);
+            user.Address.FirstName = address.FirstName;
+            user.Address.LastName = address.LastName;
+            user.Address.Street = address.Street;
+            user.Address.City = address.City;
+            user.Address.ZipCode = address.ZipCode;
 
             var result = await _userManager.UpdateAsync(user);
 
@@ -107,9 +115,9 @@ namespace API.Controllers
             if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
             {
                 return new BadRequestObjectResult(new ApiValidationErrorResponse
-                                                    {
-                                                        Errors = new[] { "Email address is in use" }
-                                                    });
+                {
+                    Errors = new[] { "Email address is in use" }
+                });
             }
 
             var user = new AppUser
@@ -133,6 +141,13 @@ namespace API.Controllers
                 Email = user.Email
             };
 
+        }
+
+        [HttpDelete]
+        public async Task DeleteUserAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            await _userManager.DeleteAsync(user);
         }
 
     }

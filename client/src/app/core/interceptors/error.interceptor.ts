@@ -30,7 +30,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           }
 
           if (error.status === 401) {
-            this.toastr.error(error.message, error.status.toString())
+            this.toastr.error(error.error.message, error.status.toString())
           }
 
           if (error.status === 404) {

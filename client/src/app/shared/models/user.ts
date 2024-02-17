@@ -4,7 +4,7 @@ export interface User {
     token: string;
 }
 
-export interface Root {
+export interface Address {
     firstName: string;
     lastName: string;
     street: string;
