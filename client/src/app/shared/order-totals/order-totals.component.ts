@@ -8,5 +8,5 @@ import { BasketService } from '../../basket/basket.service';
 })
 export class OrderTotalsComponent {
 
-  constructor(public basketService: BasketService){}
+  constructor(public basketService: BasketService) { }
 }

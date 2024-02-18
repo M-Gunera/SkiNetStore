@@ -1,0 +1,31 @@
+<div class="container mt-5">
+    <div class="table-responsive" *ngIf="orders">
+        <table class="table table-hover" style="cursor: pointer">
+            <thead>
+                <tr>
+                    <th>
+                        <div class="py-2">Order</div>
+                    </th>
+                    <th>
+                        <div class="py-2">Date</div>
+                    </th>
+                    <th>
+                        <div class="py-2">Total</div>
+                    </th>
+                    <th>
+                        <div class="py-2">Status</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders" routerLink="/orders/{{order.id}}">
+                    <th># {{order.id}}</th>
+                    <td>{{order.orderDate | date: 'medium'}}</td>
+                    <td>{{order.total | currency}}</td>
+                    <td>{{order.status}}</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
